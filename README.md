@@ -2,21 +2,21 @@
 
 A minimal PHP Postmark SDK that enables you to send single and batched email through the PostmarkApp.com service.
 
- - [Install](#install)
- - [Creating Mailings](#creating-mailings)
+- [Install](#install)
+- [Creating Mailings](#creating-mailings)
     - [Simple Mail](#simple-mail)
     - [Tags and Metadata](#tags-and-metadata)
     - [File Attachments](#file-attachments)
     - [Postmark Templates](#postmark-templates)
     - [Named Parameters](#named-parameters)
- - [Sending Mailings](#sending-mailings)
+- [Sending Mailings](#sending-mailings)
     - [The Postmark API](#the-postmark-api)
     - [Single Mailing](#single-mailing)
     - [Batch Mailing](#batch-mailing)
- - [Development](#development)
+- [Development](#development)
     - [Running the Tests](#running-the-tests)
     - [The Virtual Machine](#the-virtual-machine)
-    
+
 ## Install
 
 ```sh
@@ -193,7 +193,7 @@ $postmark = new PostmarkApi('server token');
 Sending a single mail is different from sending a batch. The response is an instance of `SuccessResponse` or `ErrorResponse`.
 
 ```php
-use MinimalPhpPostmarkSdk\{PostmarkApi,Mailing,Email,SuccessResponse};
+use MinimalPhpPostmarkSdk\{ErrorResponse,PostmarkApi,Mailing,Email,SuccessResponse};
 
 $mailing = new Mailing(
     'from name',
@@ -205,11 +205,10 @@ $mailing = new Mailing(
 
 $response = (new PostmarkApi('server token'))->single($mailing);
 
-if ($response instanceof SuccessResponse) {
-    echo $response->messageId();
-} else {
-    echo $response->errorMessage();
-}
+echo match (get_class($response)) {
+    SuccessResponse::class => "Successfully sent message {$response->messageId()}.",
+    ErrorResponse::class => "Could not send message. {$response->errorMessage()}",
+};
 ```
 
 ### Batch Mailing
@@ -258,15 +257,16 @@ $ bin/phpunit
 
 ### The Virtual Machine
 
-The virtual machine may help if you don't have PHP 8.0 on your computer or if you want to avoid some kind of versioning collision etc. This will create an emulated server inside your computer that is configured for development of this package.
+The virtual machine may help if you don't have PHP 8.0 on your computer or if you want to avoid some kind of versioning collision etc. This will create an emulated server inside your computer that is configured for development of this
+package.
 
 For the most part this should not be necessary.
 
 Install modern versions of the following on your computer.
 
--   **Git** — [Download](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
--   **Vagrant** — [Download](https://releases.hashicorp.com/vagrant/)
--   **VirtualBox** - [Download](https://www.virtualbox.org/wiki/Downloads)
+- **Git** — [Download](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- **Vagrant** — [Download](https://releases.hashicorp.com/vagrant/)
+- **VirtualBox** - [Download](https://www.virtualbox.org/wiki/Downloads)
 
 Run the following in the repository's directory.
 

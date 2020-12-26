@@ -8,8 +8,6 @@ class PostmarkApi
     }
 
     /**
-     * @param array $batchedMailing
-     *
      * http://developer.postmarkapp.com/developer-send-api.html (send batch email)
      */
     public function batch(array $batchedMailing, int $chunkSize = 500): void
@@ -29,9 +27,6 @@ class PostmarkApi
 
     /**
      * http://developer.postmarkapp.com/developer-send-api.html (send a single email)
-     *
-     * @param Mailing $mailing
-     * @return SuccessResponse|ErrorResponse
      */
     public function single(Mailing $mailing): SuccessResponse|ErrorResponse
     {
@@ -85,9 +80,6 @@ class PostmarkApi
      *     "ErrorCode": 400,
      *     "Message": "The 'From' address you supplied (Example Name<example@email.com>) is not a Sender Signature on your account. Please add and confirm this address in order to be able to use it in the 'From' field of your messages."
      * }
-     * 
-     * @param $response
-     * @return SuccessResponse|ErrorResponse
      */
     private function responseObject($response): SuccessResponse|ErrorResponse
     {
