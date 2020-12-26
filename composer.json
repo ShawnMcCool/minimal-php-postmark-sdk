@@ -1,6 +1,6 @@
 {
   "name": "shawnmccool/minimal-php-postmark-sdk",
-  "description": "The most minimal PHP Postmark mailing SDK possible.",
+  "description": "A minimal PHP Postmark SDK that enables you to send single and batched email through the PostmarkApp.com service.",
   "license": "MIT",
   "require": {
     "php": "^8",
