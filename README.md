@@ -228,3 +228,47 @@ $mailings = [
 # manually specify chunk size {how many mailings to send in one call)
 (new PostmarkApi('server token'))->batch($mailings, 100);
 ```
+
+## Development
+
+Development can be done on any machine running at least PHP 8.0. Set up the machine yourself or use the virtual-machine provided.
+
+### Run the Unit Tests
+
+The idea here is to test everything that doesn't have side effects against the Postmark API.
+
+```shell
+$ bin/phpunit
+```
+
+### Install the Virtual Machine
+
+The virtual machine may help if you don't have PHP 8.0 on your computer or if you want to avoid some kind of versioning collision etc. For the most part this should not be necessary.
+
+Install the following on your computer.
+
+-   **Git 2.17.1** or newer — [Download](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+-   **Vagrant 2.0.2** or newer — [Download](https://releases.hashicorp.com/vagrant/)
+-   **VirtualBox**
+
+Run the following in the repository's directory.
+
+```shell
+$ git submodule update --init virtual-machine
+$ vagrant up
+```
+
+The virtual machine will initialize. Afterwards enter the virtual machine and run the tests to validate the setup.
+
+```shell
+$ vagrant ssh
+
+Welcome to Ubuntu 18.04 LTS (GNU/Linux 4.15.0-20-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+Last login: Sat Dec 26 16:29:42 2020 from 10.0.2.2
+minimal-php-postmark-sdk :: /vagrant $ bin/phpunit
+```
