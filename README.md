@@ -1,6 +1,12 @@
-# minimal-php-postmark-sdk
+# Minimal PHP Postmark SDK
 
-The most minimal PHP Postmark mailing SDK possible.
+A minimal PHP Postmark SDK that enables you to send single and batched email through the PostmarkApp.com service.
+
+## Install
+
+```shell
+$ composer require shawnmccool/minimal-php-postmark-sdk
+```
 
 ## Creating Mailings
 
