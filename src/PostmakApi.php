@@ -94,7 +94,7 @@ class PostmarkApi
         $r = json_decode($response);
 
         return match ($r->ErrorCode) {
-            0 => new SuccessResponse($r->MessageID, EmailAddress::fromString($r->To), Timestamp::now()),
+            0 => new SuccessResponse($r->MessageID, Email::fromString($r->To), Timestamp::now()),
             default => new ErrorResponse($r->ErrorCode, $r->Message),
         };
     }

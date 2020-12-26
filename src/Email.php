@@ -1,6 +1,6 @@
 <?php namespace MinimalPhpPostmarkSdk;
 
-class EmailAddress
+class Email
 {
     private function __construct(
         private string $address
@@ -15,7 +15,7 @@ class EmailAddress
         return $this->address;
     }
 
-    function equals(EmailAddress $that): bool
+    function equals(Email $that): bool
     {
         return $this->address == $that->address;
     }

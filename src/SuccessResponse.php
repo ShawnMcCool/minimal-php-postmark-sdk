@@ -4,7 +4,7 @@ final class SuccessResponse
 {
     public function __construct(
         private string $messageId,
-        private EmailAddress $toEmail,
+        private Email $toEmail,
         private Timestamp $sentAt
     ) {
     }
@@ -14,7 +14,7 @@ final class SuccessResponse
         return $this->messageId;
     }
 
-    public function emailAddress(): EmailAddress
+    public function toEmail(): Email
     {
         return $this->toEmail;
     }

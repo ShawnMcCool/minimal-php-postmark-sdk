@@ -1,19 +1,19 @@
 <?php namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use MinimalPhpPostmarkSdk\EmailAddress;
+use MinimalPhpPostmarkSdk\Email;
 use MinimalPhpPostmarkSdk\EmailAddressIsNotValid;
 
-class EmailAddressTest extends TestCase
+class EmailTest extends TestCase
 {
     function testCanBeValidEmailAddresses()
     {
-        self::assertInstanceOf(EmailAddress::class, EmailAddress::fromString('test@email.com'));
+        self::assertInstanceOf(Email::class, Email::fromString('test@email.com'));
     }
 
     function testCantBeAnInvalidEmailAddress()
     {
         $this->expectException(EmailAddressIsNotValid::class);
-        EmailAddress::fromString('not a valid email address');
+        Email::fromString('not a valid email address');
     }
 }

@@ -4,10 +4,10 @@ class Mailing
 {
     public function __construct(
         private string $fromName,
-        private EmailAddress $fromEmail,
-        private EmailAddress $toEmail,
-        private ?string $subject,
-        private ?string $html,
+        private Email $fromEmail,
+        private Email $toEmail,
+        private ?string $subject = null,
+        private ?string $html = null,
         private array $attachments = [],
         private string $messageTypeTag = '',
         private array $metadata = [],
@@ -26,12 +26,12 @@ class Mailing
         return $this->fromName;
     }
 
-    public function fromEmail(): EmailAddress
+    public function fromEmail(): Email
     {
         return $this->fromEmail;
     }
 
-    public function toEmail(): EmailAddress
+    public function toEmail(): Email
     {
         return $this->toEmail;
     }

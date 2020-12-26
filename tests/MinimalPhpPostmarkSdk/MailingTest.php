@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use MinimalPhpPostmarkSdk\Mailing;
 use MinimalPhpPostmarkSdk\Attachment;
-use MinimalPhpPostmarkSdk\EmailAddress;
+use MinimalPhpPostmarkSdk\Email;
 
 class MailingTest extends TestCase
 {
@@ -11,8 +11,8 @@ class MailingTest extends TestCase
     {
         $mailing = new Mailing(
             'fromName',
-            EmailAddress::fromString('fromEmail@email.com'),
-            EmailAddress::fromString('toEmail@email.com'),
+            Email::fromString('fromEmail@email.com'),
+            Email::fromString('toEmail@email.com'),
             'subject line',
             'html body',
             [
