@@ -2,6 +2,21 @@
 
 A minimal PHP Postmark SDK that enables you to send single and batched email through the PostmarkApp.com service.
 
+ - [Install](#install)
+ - [Creating Mailings](#creating-mailings)
+    - [Simple Mail](#simple-mail)
+    - [Tags and Metadata](#tags-and-metadata)
+    - [File Attachments](#file-attachments)
+    - [Postmark Templates](#postmark-templates)
+    - [Named Parameters](#named-parameters)
+ - [Sending Mailings](#sending-mailings)
+    - [The Postmark API](#the-postmark-api)
+    - [Single Mailing](#single-mailing)
+    - [Batch Mailing](#batch-mailing)
+ - [Development](#development)
+    - [Running the Tests](#running-the-tests)
+    - [The Virtual Machine](#the-virtual-machine)
+    
 ## Install
 
 ```shell
@@ -157,9 +172,9 @@ new Mailing(
 );
 ```
 
-## Send the Mailing
+## Sending Mailings
 
-### Interacting with the Postmark API
+### The Postmark API
 
 You'll need a server token from postmark.
 
@@ -173,7 +188,7 @@ use MinimalPhpPostmarkSdk\PostmarkApi;
 $postmark = new PostmarkApi('server token');
 ```
 
-### Send a Single Mailing
+### Single Mailing
 
 Sending a single mail is different from sending a batch. The response is an instance of `SuccessResponse` or `ErrorResponse`.
 
@@ -197,7 +212,7 @@ if ($response instanceof SuccessResponse) {
 }
 ```
 
-### Send a Batch Mailing
+### Batch Mailing
 
 A batched mailing is an array of mailings that will be sent to the Postmark api in chunks. This prevents new connections to the api being made for each and every mailing. By default the batch mailing will send chunks of 500 mailings at
 once; but this can be configured.
@@ -233,7 +248,7 @@ $mailings = [
 
 Development can be done on any machine running at least PHP 8.0. Set up the machine yourself or use the virtual-machine provided.
 
-### Run the Unit Tests
+### Running the Tests
 
 The idea here is to test everything that doesn't have side effects against the Postmark API.
 
@@ -241,9 +256,11 @@ The idea here is to test everything that doesn't have side effects against the P
 $ bin/phpunit
 ```
 
-### Install the Virtual Machine
+### The Virtual Machine
 
-The virtual machine may help if you don't have PHP 8.0 on your computer or if you want to avoid some kind of versioning collision etc. For the most part this should not be necessary.
+The virtual machine may help if you don't have PHP 8.0 on your computer or if you want to avoid some kind of versioning collision etc. This will create an emulated server inside your computer that is configured for development of this package.
+
+For the most part this should not be necessary.
 
 Install the following on your computer.
 
