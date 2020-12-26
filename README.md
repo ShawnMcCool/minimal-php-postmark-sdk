@@ -262,11 +262,11 @@ The virtual machine may help if you don't have PHP 8.0 on your computer or if yo
 
 For the most part this should not be necessary.
 
-Install the following on your computer.
+Install modern versions of the following on your computer.
 
--   **Git 2.17.1** or newer — [Download](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
--   **Vagrant 2.0.2** or newer — [Download](https://releases.hashicorp.com/vagrant/)
--   **VirtualBox**
+-   **Git** — [Download](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+-   **Vagrant** — [Download](https://releases.hashicorp.com/vagrant/)
+-   **VirtualBox** - [Download](https://www.virtualbox.org/wiki/Downloads)
 
 Run the following in the repository's directory.
 
