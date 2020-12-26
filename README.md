@@ -19,7 +19,7 @@ A minimal PHP Postmark SDK that enables you to send single and batched email thr
     
 ## Install
 
-```shell
+```shellscript
 $ composer require shawnmccool/minimal-php-postmark-sdk
 ```
 
@@ -252,7 +252,7 @@ Development can be done on any machine running at least PHP 8.0. Set up the mach
 
 The idea here is to test everything that doesn't have side effects against the Postmark API.
 
-```shell
+```shellscript
 $ bin/phpunit
 ```
 
@@ -270,14 +270,14 @@ Install the following on your computer.
 
 Run the following in the repository's directory.
 
-```shell
+```shellscript
 $ git submodule update --init virtual-machine
 $ vagrant up
 ```
 
 The virtual machine will initialize. Afterwards enter the virtual machine and run the tests to validate the setup.
 
-```shell
+```shellscript
 $ vagrant ssh
 
 Welcome to Ubuntu 18.04 LTS (GNU/Linux 4.15.0-20-generic x86_64)
