@@ -12,8 +12,6 @@ class Timestamp
 
     /**
      * return a string in mysql date time format
-     *
-     * @return string
      */
     public function toMysqlDateTime(): string
     {
@@ -23,8 +21,6 @@ class Timestamp
     /**
      * return a string in ISO8601 date time format (preferred date
      * time serialization format due to zone offset being included)
-     *
-     * @return string
      */
     public function toIso8601(): string
     {
@@ -54,8 +50,6 @@ class Timestamp
     /**
      * now() creates a new timestamp for the current moment based
      * on the server's php datetime configuration
-     *
-     * @throws \Exception
      */
     public static function now(): Timestamp
     {
@@ -64,11 +58,8 @@ class Timestamp
 
     /**
      * construct a timestamp from string using the system timezone
-     *
-     * @param $timeString
-     * @return static
      */
-    public static function fromString($timeString): Timestamp
+    public static function fromString(string $timeString): Timestamp
     {
         return new static(new DateTimeImmutable($timeString));
     }
@@ -77,12 +68,8 @@ class Timestamp
      * construct a timestamp from string including timezone
      *
      * The time string can be any php format
-     *
-     * @param $timeString
-     * @param $timeZone
-     * @return static
      */
-    public static function fromStringWithTimezone($timeString, $timeZone): Timestamp
+    public static function fromStringWithTimezone(string $timeString, string $timeZone): Timestamp
     {
         return new static(new DateTimeImmutable($timeString, new DateTimeZone($timeZone)));
     }
