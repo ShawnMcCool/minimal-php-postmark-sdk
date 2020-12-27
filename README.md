@@ -2,6 +2,7 @@
 
 A minimal PHP Postmark SDK that enables you to send single and batched email through the PostmarkApp.com service.
 
+- [Design](#design)
 - [Install](#install)
 - [Creating Mailings](#creating-mailings)
     - [Simple Mail](#simple-mail)
@@ -16,6 +17,10 @@ A minimal PHP Postmark SDK that enables you to send single and batched email thr
 - [Development](#development)
     - [Running the Tests](#running-the-tests)
     - [The Virtual Machine](#the-virtual-machine)
+
+## Design
+
+To maintain reliability, some objects are used for data (such as email and metadata) so that they can ensure that either the data conforms to specification or the developer is made aware of it as quickly as possible.
 
 ## Install
 
