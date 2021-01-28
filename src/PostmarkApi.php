@@ -18,7 +18,7 @@ class PostmarkApi
             $this->post(
                 'https://api.postmarkapp.com/email/batch',
                 array_map(
-                    fn(Mailing $mailing) => $mailing->serialize(),
+                    fn(Mailing $mailing) => $mailing->serializeToApi(),
                     $batch
                 )
             );
