@@ -1,5 +1,7 @@
 <?php namespace MinimalPhpPostmarkSdk;
 
+use JetBrains\PhpStorm\ArrayShape;
+
 class Attachment
 {
     public function __construct(
@@ -24,9 +26,10 @@ class Attachment
         return $this->contents;
     }
 
-    public function serializeToApi(): object
+    #[ArrayShape(['Name' => "string", 'Content' => "string", 'ContentType' => "string"])]
+    public function serializeToApi(): array
     {
-        return (object) [
+        return [
             'Name' => $this->name,
             'Content' => base64_encode($this->contents),
             'ContentType' => $this->mimeType,

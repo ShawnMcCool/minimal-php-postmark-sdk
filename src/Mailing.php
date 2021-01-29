@@ -87,8 +87,8 @@ class Mailing
             'From' => $this->fromName . ' <' . $this->fromEmail->toString() . '>',
             'To' => $this->toEmail->toString(),
             'Attachments' => array_map(
-                fn(Attachment $attachment) => $attachment->serializeToApi()
-                , $this->attachments
+                fn(Attachment $attachment) => $attachment->serializeToApi(),
+                $this->attachments
             ),
             'Tag' => $this->messageTypeTag,
         ];
@@ -119,7 +119,7 @@ class Mailing
             $fields['TemplateAlias'] = $this->templateAlias;
             $fields['TemplateModel'] = $this->templateModel;
         }
-
+        
         return $fields;
     }
 }

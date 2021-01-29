@@ -28,8 +28,8 @@ class AttachmentTest extends TestCase
 
         $serialized = $attachment->serializeToApi();
 
-        self::assertSame('filename.txt', $serialized->Name);
-        self::assertSame('text/plain', $serialized->ContentType);
-        self::assertSame('file contents', base64_decode($serialized->Content));
+        self::assertSame('filename.txt', $serialized['Name']);
+        self::assertSame('text/plain', $serialized['ContentType']);
+        self::assertSame('file contents', base64_decode($serialized['Content']));
     }
 }

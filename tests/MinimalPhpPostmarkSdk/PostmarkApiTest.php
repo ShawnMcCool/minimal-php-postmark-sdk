@@ -9,4 +9,8 @@ class PostmarkApiTest extends TestCase
     {
         self::assertInstanceOf(PostmarkApi::class, new PostmarkApi('token'));
     }
+    
+    function testCanReturnSuccessResponses() {
+        // inject an http layer
+    }
 }

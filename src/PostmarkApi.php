@@ -10,12 +10,14 @@ class PostmarkApi
     /**
      * http://developer.postmarkapp.com/developer-send-api.html (send batch email)
      */
-    public function batch(array $batchedMailing, int $chunkSize = 500): void
+    public function batch(array $batchedMailing, int $chunkSize = 500): array
     {
         $batches = array_chunk($batchedMailing, $chunkSize);
 
+        $responses = [];
+
         foreach ($batches as $batch) {
-            $this->post(
+            $responses[] = $this->post(
                 'https://api.postmarkapp.com/email/batch',
                 array_map(
                     fn(Mailing $mailing) => $mailing->serializeToApi(),
@@ -23,6 +25,13 @@ class PostmarkApi
                 )
             );
         }
+
+        return array_map(
+            fn($response) => $this->responseObject(
+                json_decode($response)[0]
+            ),
+            $responses
+        );
     }
 
     /**
@@ -35,7 +44,9 @@ class PostmarkApi
                 ? 'https://api.postmarkapp.com/email/withTemplate'
                 : 'https://api.postmarkapp.com/email';
 
-        return $this->post($url, $mailing->serializeToApi());
+        $response = $this->post($url, $mailing->serializeToApi());
+
+        return $this->responseObject($response);
     }
 
     private function post($url, array $fields): ErrorResponse|SuccessResponse
@@ -65,7 +76,7 @@ class PostmarkApi
     }
 
     /**
-     * 
+     *
      * # Success
      * {
      *     "To": "example@email.com",
@@ -74,20 +85,23 @@ class PostmarkApi
      *     "ErrorCode": 0,
      *     "Message": "OK"
      * }
-     * 
-     * # Error       
+     *
+     * # Error
      * {
      *     "ErrorCode": 400,
      *     "Message": "The 'From' address you supplied (Example Name<example@email.com>) is not a Sender Signature on your account. Please add and confirm this address in order to be able to use it in the 'From' field of your messages."
      * }
      */
-    private function responseObject($response): SuccessResponse|ErrorResponse
+    private function responseObject($r): SuccessResponse|ErrorResponse
     {
-        $r = json_decode($response);
+        if ($r->ErrorCode === 0) {
+            return new SuccessResponse($r->MessageID, Email::fromString($r->To), Timestamp::now());
+        }
 
-        return match ($r->ErrorCode) {
-            0 => new SuccessResponse($r->MessageID, Email::fromString($r->To), Timestamp::now()),
-            default => new ErrorResponse($r->ErrorCode, $r->Message),
-        };
+        if (is_null($r->ErrorCode)) {
+            throw new \Exception('unknown failure ' . var_export($r));
+        }
+
+        return new ErrorResponse($r->ErrorCode, $r->Message);
     }
 }
