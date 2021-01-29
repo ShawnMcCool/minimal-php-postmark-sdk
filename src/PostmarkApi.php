@@ -37,7 +37,7 @@ class PostmarkApi
     /**
      * http://developer.postmarkapp.com/developer-send-api.html (send a single email)
      */
-    public function single(Mailing $mailing): string
+    public function single(Mailing $mailing): SuccessResponse|ErrorResponse
     {
         $url =
             $mailing->isTemplateMail()
@@ -49,7 +49,7 @@ class PostmarkApi
         return $this->responseObject($response);
     }
 
-    private function post($url, array $fields): ErrorResponse|SuccessResponse
+    private function post($url, array $fields): string
     {
         $ch = curl_init();
 
