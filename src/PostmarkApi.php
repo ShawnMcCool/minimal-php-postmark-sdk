@@ -72,7 +72,7 @@ class PostmarkApi
         $response = curl_exec($ch);
         curl_close($ch);
 
-        return $this->responseObject($response);
+        return $response;
     }
 
     /**
