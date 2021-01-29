@@ -14,10 +14,10 @@ class PostmarkApi
     {
         $batches = array_chunk($batchedMailing, $chunkSize);
 
-        $responses = [];
+        $batchResponses = [];
 
         foreach ($batches as $batch) {
-            $responses[] = $this->post(
+            $batchResponses[] = $this->post(
                 'https://api.postmarkapp.com/email/batch',
                 array_map(
                     fn(Mailing $mailing) => $mailing->serializeToApi(),
@@ -27,10 +27,13 @@ class PostmarkApi
         }
 
         return array_map(
-            fn($response) => $this->responseObject(
-                json_decode($response)[0]
-            ),
-            $responses
+            function ($batchResponse) {
+                return array_map(
+                    fn($responseObject) => $this->responseObject($responseObject),
+                    json_decode($batchResponse)
+                );
+            },
+            $batchResponses
         );
     }
 
