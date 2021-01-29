@@ -37,7 +37,7 @@ class PostmarkApi
     /**
      * http://developer.postmarkapp.com/developer-send-api.html (send a single email)
      */
-    public function single(Mailing $mailing): SuccessResponse|ErrorResponse
+    public function single(Mailing $mailing): string
     {
         $url =
             $mailing->isTemplateMail()
